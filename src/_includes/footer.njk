@@ -1,17 +1,22 @@
-<footer class="container mx-auto flex mt-24 justify-between space-x-2 py-12 border-t-2 border-black">
+<footer class="container mx-auto flex flex-col items-center space-y-4 md:space-y-0 md:items-stretch md:flex-row md:mt-12 
+md:justify-between py-12 border-t-2
+        border-black">
     <img src="/assets/footer.webp" alt="Cool footer image" height="240" width="300">
-    <div class="max-w-lg font-display flex flex-col justify-between">
-        <h3 class="text-3xl">Italy, class 1975</h3>
-        <p>Both a lucky curse and a blessing, growing up in Florence has forced me to develop an eye for good design and style.
-It never leaves me, wherever I go or whatever I do can't resist noticing the beautiful details of the world sorrounding us. </p>
-<p class="">All Rights Reserved 2021</p>
+    <div class="max-w-sm lg:max-w-lg font-display flex flex-col items-center 
+    md:items-start md:justify-around px-4 md:px-0 space-y-4 md:space-y-0">
+        <h3 class=" text-xl lg:text-3xl">Italy, class 1975</h3>
+        <p class="text-center md:text-left text-sm lg:text-base">Both a lucky curse and a blessing, growing up in Florence has forced me to develop an eye for good design and style.
+            It never leaves me, wherever I go or whatever I do can't resist noticing the beautiful details of the world sorrounding
+            us.
+        </p>
+        <p class="">All Rights Reserved 2021</p>
     </div>
-    <div class="flex flex-col justify-evenly">
+    <div class="flex md:flex-col">
         <a href="https://www.facebook.com/lorenzobeltrame1975" target="_blank">
-        <span class="inline-block w-16 h-16">{% include 'svg/facebook.svg' %}</span>
+            <span class="inline-block w-8 h-8 lg:w-16 lg:h-16">{% include 'svg/facebook.svg' %}</span>
         </a>
         <a href="https://www.instagram.com/360thailand/" target="_blank">
-        <span class="inline-block w-16 h-16">{% include 'svg/instagram.svg' %}</span>
+            <span class="inline-block ml-6 md:ml-0 w-8 h-8 lg:w-16 lg:h-16">{% include 'svg/instagram.svg' %}</span>
         </a>
     </div>
 </footer>
