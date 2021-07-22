@@ -3,13 +3,12 @@ module.exports = {
   darkMode: false,
   theme: {
     container: {
-      center: true,
-      padding: '1.5rem',
     },
-    debugScreens: {
-      position: ['bottom', 'right'],
+    extend: {
+      fontFamily: {
+        display: ['Playfair Display', 'serif']
+      },
     },
-    extend: {},
   },
   plugins: [
     require('@tailwindcss/forms'),
