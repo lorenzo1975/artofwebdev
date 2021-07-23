@@ -2,13 +2,13 @@
 {% set title = 'Home of Art of Web Dev' %}
 {% extends "layout.njk" %}
 {% block body %}
-   <main class="font-display">
+   <main class="font-display text-gray-700">
       <section class="container mx-auto flex flex-col items-center">
          <img src="/assets/hero.webp" alt="hero" class="mt-12 object-cover">
             <h4 class="md:text-md text-gray-500 mt-8 uppercase">Hi I am Lorenzo!</h4>
             <h1 class="leading-normal text-2xl lg:text-5xl max-w-xl text-center mt-4">I Design &#38 Develop Custom Digital Solutions,</h1>
             <h4 class="text-md mt-2 uppercase transform p-1 -rotate-2 bg-yellow-300 text-yellow-900">That will boost your business!</h4>
-            <p class="max-w-2xl text-gray-700 mt-6 text-center">
+            <p class="max-w-2xl mt-6 text-center">
                You can call me a true Veteran of the Web as I have seen it growing from the early days! Bookings was renaming to Booking, Amazon did mainly sold books, Dreamweaver
                was the number one software to build website and tables could be used for layouts! <br>
                It was the glorious end of 90&#39;! and so much have changed since then.
@@ -19,7 +19,7 @@
                <h1 class="leading-normal text-2xl lg:text-5xl max-w-xl text-center lg:-mt-24">Client&#39; s first approach, I have been in your
                   <span class="bg-yellow-400 inline-block text-black transform -rotate-2">shoes!</span>
                </h1>
-               <p class="max-w-2xl text-gray-700 mt-6 text-center">
+               <p class="max-w-2xl mt-6 text-center">
                   I have been first and foremost a Client of my own products, yes you read it right! In the early 2000&#39; it was still possible to create a 
                   successfull business by having a relatively good idea and a website, and that&#39; what I did! My first
                   online venture was a local airbnb style accommodation booking website for the city of Florence, Italy. <br> <br>
@@ -37,12 +37,13 @@
             </section>
             <section class="container mx-auto flex flex-col items-center mt-6 lg:mt-24 ">
                <h3 class="text-2xl">What can I build for You?</h3>
-               <p class="max-w-2xl text-gray-700 mt-6 text-center">
+               <p class="max-w-2xl mt-6 text-center">
                   I can build from not so trivial, well optimized, modern landing / websites with custom design and code to medium size fullstack web applications
                   to scale your business. This with a bit of long term vision and my experience in this world, what might work and what might not work. Where to invest and 
                   where to save.
                </p>
                <img src="/assets/pattern-flipped.webp" class="object-cover transform rotate-180 lg:-mt-24" alt=""></section>
                {% include 'blogList.njk' %}
+               {% include 'contact.njk' %}
             </main>
          {% endblock %}
