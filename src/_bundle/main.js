@@ -23,3 +23,4 @@ window.addEventListener('alpine:initializing', () => {
     toggle() { return this.isOpen = !this.isOpen }
   })
 });
+

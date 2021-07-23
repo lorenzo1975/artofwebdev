@@ -2,72 +2,133 @@
     <div class="w-full flex items-center justify-center my-12">
         <div class="bg-white shadow rounded py-12 lg:px-28 px-8">
             <p class="md:text-3xl text-xl font-bold leading-7 text-center text-gray-700">Let’s chat and get a quote!</p>
-            <form name="contact" method="POST" data-netlify="true">
-            <div class="md:flex items-center mt-12">
-                <div class="md:w-72 flex flex-col">
-                    <label class="text-base font-semibold leading-none text-gray-800">Name</label>
-                    <input
-                        tabindex="0"
-                        arial-label="Please input name"
-                        type="name"
-                        class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100 border
-                            rounded border-gray-200 placeholder-gray-100"
-                        placeholder="Please input  name"/>
+            <form
+                x-data="{ name : '', nameDirty: false, message: '', messageDirty: false, email: '', emailDirty: false, }"
+                x-on:submit.prevent=" nameDirty = true; emailDirty = true; messageDirty = true; submitMessage(name, email, message);"
+                id="contact"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                data-netlify-recaptcha="true">
+                <p hidden>
+                    <label>ignore: <input name="bot-field"/></label>
+                </p>
+                <input type="hidden" name="form-name" value="contact"/>
+                <div class="md:flex items-center mt-12">
+                    <div class="md:w-72 flex flex-col relative">
+                        <label class="text-base font-semibold leading-none text-gray-800">Name</label>
+                        <input
+                            tabindex="0"
+                            arial-label="Please input name"
+                            type="text"
+                            name="name"
+                            x-model="name"
+                            x-on:blur="nameDirty = true"
+                            class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
+                                border rounded border-gray-200 placeholder-gray-100"
+                            placeholder="Please input name"/>
+                        <p x-show.transition="nameDirty && name.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
+                            Please fill out your full name.
+                        </p>
+                    </div>
+                    <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4 relative">
+                        <label class="text-base font-semibold leading-none text-gray-800">Email Address</label>
+                        <input
+                            tabindex="0"
+                            arial-label="Please input email address"
+                            type="email"
+                            name="email"
+                            x-model="email"
+                            x-on:blur="emailDirty = true"
+                            class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
+                                border rounded border-gray-200 placeholder-gray-100"
+                            placeholder="Please input email address"/>
+                        <p x-show.transition="emailDirty && !isEmail(email)" class="text-red-700 absolute -bottom-7" x-cloak>
+                            Please fill out your email.
+                        </p>
+                    </div>
                 </div>
-                <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4">
-                    <label class="text-base font-semibold leading-none text-gray-800">Email Address</label>
-                    <input
-                        tabindex="0"
-                        arial-label="Please input email address"
-                        type="name"
-                        class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100 border
-                            rounded border-gray-200 placeholder-gray-100"
-                        placeholder="Please input email address"/>
+                <div class="md:flex items-center mt-8">
+                    <div class="md:w-72 flex flex-col">
+                        <label class="text-base font-semibold leading-none text-gray-800">Company name</label>
+                        <input
+                            tabindex="0"
+                            role="input"
+                            arial-label="Phone number"
+                            type="phone"
+                            name="phone"
+                            class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
+                                border rounded border-gray-200 placeholder-gray-100"
+                            placeholder="Please input company name"/>
+                    </div>
+                    <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4">
+                        <label class="text-base font-semibold leading-none text-gray-800">Country</label>
+                        <input
+                            tabindex="0"
+                            arial-label="Please input country name"
+                            type="text"
+                            name="country"
+                            class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
+                                border rounded border-gray-200 placeholder-gray-100"
+                            placeholder="Please input country name"/>
+                    </div>
                 </div>
-            </div>
-            <div class="md:flex items-center mt-8">
-                <div class="md:w-72 flex flex-col">
-                    <label class="text-base font-semibold leading-none text-gray-800">Company name</label>
-                    <input
-                        tabindex="0"
-                        role="input"
-                        arial-label="Phone number"
-                        type="phone"
-                        class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100 border
-                            rounded border-gray-200 placeholder-gray-100"
-                        placeholder="Please input company name"/>
+                <div>
+                    <div class="w-full flex flex-col mt-8 relative">
+                        <label class="text-base font-semibold leading-none text-gray-800">Message</label>
+                        <textarea
+                            tabindex="0"
+                            aria-label="leave a message"
+                            role="textbox"
+                            type="name"
+                            name="message"
+                            x-model="message"
+                            x-on:blur="messageDirty = true"
+                            class="h-36 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4
+                                bg-gray-100 border rounded border-gray-200 placeholder-gray-100 resize-none"></textarea>
+                        <p x-show.transition="messageDirty && message.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
+                            Please enter a message.
+                        </p>
+                    </div>
                 </div>
-                <div class="md:w-72 flex flex-col md:ml-6 md:mt-0 mt-4">
-                    <label class="text-base font-semibold leading-none text-gray-800">Country</label>
-                    <input
-                        tabindex="0"
-                        arial-label="Please input country name"
-                        type="name"
-                        class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100 border
-                            rounded border-gray-200 placeholder-gray-100"
-                        placeholder="Please input country name"/>
+                <div data-netlify-recaptcha="true"></div>
+                <div class="flex items-center justify-center w-full">
+                    <button
+                        type="submit"
+                        class="mt-9 text-base font-semibold leading-none text-gray-900 py-4 px-10 bg-yellow-300 rounded hover:bg-yellow-200
+                            focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:outline-none">
+                        SUBMIT</button>
                 </div>
-            </div>
-            <div>
-                <div class="w-full flex flex-col mt-8">
-                    <label class="text-base font-semibold leading-none text-gray-800">Message</label>
-                    <textarea
-                        tabindex="0"
-                        aria-label="leave a message"
-                        role="textbox"
-                        type="name"
-                        class="h-36 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100 border
-                            rounded border-gray-200 placeholder-gray-100 resize-none"></textarea>
-                </div>
-            </div>
-            <p class="text-xs leading-3 text-gray-600 mt-4">By clicking submit you agree to our terms of service, privacy policy and
-                how we use data as stated</p>
-            <div class="flex items-center justify-center w-full">
-                <button class="mt-9 text-base font-semibold leading-none text-gray-900 py-4 px-10 bg-yellow-300 rounded hover:bg-yellow-200
-                    focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:outline-none">
-                SUBMIT</button>
-            </div>
             </form>
         </div>
     </div>
 </section>
+<script>
+    function isEmail(value) {
+        return new RegExp("^\\S+@\\S+[\\.][0-9a-z]+$").test(String(value).toLowerCase());
+    }
+    function submitMessage(name, email, message) {
+        if (! name || name.length == 0 || ! email || ! isEmail || ! message || message.length == 0) {
+            return;
+        }
+        let formElement = document.getElementById("contact");
+        let body = new URLSearchParams(new FormData(formElement)).toString();
+        return fetch("/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: body
+        }).then((response) => {
+            if (response.ok) {
+                formElement.reset();
+                alert("Thank you for your message!");
+            } else {
+                throw new Error(`Something went wrong: ${
+                    response.statusText
+                }`);
+            }
+        }).catch((error) => console.error(error));
+    }
+</script>
