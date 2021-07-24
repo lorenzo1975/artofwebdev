@@ -1,0 +1,10 @@
+{% extends 'layout.njk' %}
+
+{% block body %}
+
+  {# Content #}
+  <section class="container mx-auto prose prose-indigo lg:prose-lg section-spacing">
+    {{ content | safe }}
+  </section>
+
+{% endblock body %}

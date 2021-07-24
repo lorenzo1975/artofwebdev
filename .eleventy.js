@@ -1,4 +1,5 @@
 module.exports = (config) => {
+  config.addFilter('prettyDate', require('./src/_config/prettyDate'))
   config.addPassthroughCopy({ 'public': './' })
   config.setBrowserSyncConfig({
     files: ['dist/**/*'],
