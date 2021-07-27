@@ -8,6 +8,11 @@ module.exports = {
       fontFamily: {
         display: ['Playfair Display', 'serif']
       },
+      colors: {
+        yellow: {
+          250: '#FFDE18'
+        }
+      }
     },
   },
   plugins: [
