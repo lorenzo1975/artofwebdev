@@ -20,3 +20,32 @@ md:justify-between py-12 border-t-2
         </a>
     </div>
 </footer>
+<script>
+function isEmail(value) {
+  return new RegExp("^\\S+@\\S+[\\.][0-9a-z]+$").test(String(value).toLowerCase());
+}
+function submitMessage(name, email, message) {
+  if (! name || name.length == 0 || ! email || ! isEmail || ! message || message.length == 0) {
+      return;
+  }
+  let formElement = document.getElementById("contact");
+  let body = new URLSearchParams(new FormData(formElement)).toString();
+  console.log(body)
+  fetch("/", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body
+  }).then((response) => {
+      if (response.ok) {
+          formElement.reset();
+          alert("Thank you for your message! ");
+      } else {
+          throw new Error(`Something went wrong: ${
+              response
+          }`);
+      }
+  }).catch((error) => console.error(error));
+}
+</script>
