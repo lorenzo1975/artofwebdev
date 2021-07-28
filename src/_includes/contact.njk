@@ -10,12 +10,8 @@
                 name="contact"
                 method="POST"
                 data-netlify="true"
-                netlify-honeypot="bot-field"
                 >
-                <p hidden>
-                    <label>ignore: <input name="bot-field"/></label>
-                </p>
-                <input type="hidden" name="form-name" value="contact">
+
                 <div class="md:flex items-center mt-12">
                     <div class="md:w-72 flex flex-col relative">
                         <label class="text-base font-semibold leading-none text-gray-800">Name</label>
@@ -93,6 +89,7 @@
                         </p>
                     </div>
                 </div>
+                <p></p>
                 <div class="flex items-center justify-center w-full">
                     <button
                         type="submit"
@@ -114,12 +111,13 @@
         }
         let formElement = document.getElementById("contact");
         let body = new URLSearchParams(new FormData(formElement)).toString();
+        console.log(body)
         fetch("/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: body
+            body
         }).then((response) => {
             if (response.ok) {
                 formElement.reset();
