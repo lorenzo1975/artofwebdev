@@ -1,17 +1,23 @@
-<section class="container mx-auto" id="hireme"
->
+<section class="container mx-auto" id="hireme">
     <div class="w-full flex items-center justify-center my-12">
         <div class="py-12 lg:px-28 px-8">
             <p class="md:text-3xl text-xl font-bold leading-7 text-center text-gray-700">Let’s chat and get a quote!</p>
+            <form hidden name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <label><input type="text" name="name" /></label>
+                <label> <input type="email" name="email" /></label>
+                <label> <input type="text" name="company" /></label>
+                <label> <input type="text" name="country" /></label>
+                <label><textarea name="message"></textarea></label>
+            </form>
             <form
                 x-data="{ name : '', nameDirty: false, message: '', messageDirty: false, email: '', emailDirty: false, }"
                 x-on:submit.prevent=" nameDirty = true; emailDirty = true; messageDirty = true; submitMessage(name, email, message);"
                 id="contact"
-                name="contact"
-                method="POST"
-                data-netlify="true"
                 >
-
+                
+                <p hidden>
+                    <label>ignore: <input name="bot-field"/></label>
+                </p>
                 <div class="md:flex items-center mt-12">
                     <div class="md:w-72 flex flex-col relative">
                         <label class="text-base font-semibold leading-none text-gray-800">Name</label>
@@ -25,7 +31,7 @@
                             class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
                                 border rounded border-gray-200 placeholder-gray-100"
                             placeholder="Please input name"/>
-                        <p x-show.transition="nameDirty && name.length == 0" class="text-red-700 absolute -bottom-7">
+                        <p x-show.transition="nameDirty && name.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
                             Please fill out your full name.
                         </p>
                     </div>
@@ -41,7 +47,7 @@
                             class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
                                 border rounded border-gray-200 placeholder-gray-100"
                             placeholder="Please input email address"/>
-                        <p x-show.transition="emailDirty && !isEmail(email)" class="text-red-700 absolute -bottom-7">
+                        <p x-show.transition="emailDirty && !isEmail(email)" class="text-red-700 absolute -bottom-7" x-cloak>
                             Please fill out your email.
                         </p>
                     </div>
@@ -84,19 +90,50 @@
                             x-on:blur="messageDirty = true"
                             class="h-36 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4
                                 bg-gray-100 border rounded border-gray-200 placeholder-gray-100 resize-none"></textarea>
-                        <p x-show.transition="messageDirty && message.length == 0" class="text-red-700 absolute -bottom-7">
+                        <p x-show.transition="messageDirty && message.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
                             Please enter a message.
                         </p>
                     </div>
                 </div>
                 <p></p>
                 <div class="flex items-center justify-center w-full">
-                    <button
-                        class="mt-9 text-base font-semibold leading-none text-gray-900 py-4 px-10 bg-yellow-300 rounded hover:bg-yellow-250
+                    <button class="mt-9 text-base font-semibold leading-none text-gray-900 py-4 px-10 bg-yellow-300 rounded hover:bg-yellow-250
                             focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:outline-none">
                         SUBMIT</button>
                 </div>
             </form>
-        </div>
+            <script>
+                function isEmail(value) {
+                    return new RegExp("^\\S+@\\S+[\\.][0-9a-z]+$").test(String(value).toLowerCase());
+                }
+                function submitMessage(name, email, message) {
+                    if (! name || name.length == 0 || ! email || ! isEmail || ! message || message.length == 0) {
+                        return;
+                    }
+                    let formElement = document.getElementById("contact");
+                    let body = new URLSearchParams(new FormData(formElement)).toString();
+                    console
+                        .log(body)
+                        fetch("/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body
+                        })
+                        .then((response) => {
+                            if (response.ok) {
+                                formElement.reset();
+                                alert("Thank you for your message! ");
+                            } else {
+                                throw new Error(`Something went wrong: ${
+                                    response
+                                }`);
+                            }
+                        })
+                        .catch((error) => console.error(error));
+                }
+            </script>
+        </form>
     </div>
-</section>
+</div></section>
