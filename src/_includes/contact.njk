@@ -25,7 +25,7 @@
                             class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
                                 border rounded border-gray-200 placeholder-gray-100"
                             placeholder="Please input name"/>
-                        <p x-show.transition="nameDirty && name.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
+                        <p x-show.transition="nameDirty && name.length == 0" class="text-red-700 absolute -bottom-7">
                             Please fill out your full name.
                         </p>
                     </div>
@@ -41,7 +41,7 @@
                             class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
                                 border rounded border-gray-200 placeholder-gray-100"
                             placeholder="Please input email address"/>
-                        <p x-show.transition="emailDirty && !isEmail(email)" class="text-red-700 absolute -bottom-7" x-cloak>
+                        <p x-show.transition="emailDirty && !isEmail(email)" class="text-red-700 absolute -bottom-7">
                             Please fill out your email.
                         </p>
                     </div>
@@ -52,9 +52,9 @@
                         <input
                             tabindex="0"
                             role="input"
-                            arial-label="Phone number"
-                            type="phone"
-                            name="phone"
+                            arial-label="Company"
+                            type="company"
+                            name="company"
                             class="text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4 bg-gray-100
                                 border rounded border-gray-200 placeholder-gray-100"
                             placeholder="Please input company name"/>
@@ -84,7 +84,7 @@
                             x-on:blur="messageDirty = true"
                             class="h-36 text-base leading-none text-gray-900 p-3 focus:oultine-none focus:ring-4 focus:ring-yellow-300 mt-4
                                 bg-gray-100 border rounded border-gray-200 placeholder-gray-100 resize-none"></textarea>
-                        <p x-show.transition="messageDirty && message.length == 0" class="text-red-700 absolute -bottom-7" x-cloak>
+                        <p x-show.transition="messageDirty && message.length == 0" class="text-red-700 absolute -bottom-7">
                             Please enter a message.
                         </p>
                     </div>
@@ -92,7 +92,6 @@
                 <p></p>
                 <div class="flex items-center justify-center w-full">
                     <button
-                        type="submit"
                         class="mt-9 text-base font-semibold leading-none text-gray-900 py-4 px-10 bg-yellow-300 rounded hover:bg-yellow-250
                             focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:outline-none">
                         SUBMIT</button>
