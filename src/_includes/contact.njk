@@ -126,7 +126,7 @@
         }).then((response) => {
             if (response.ok) {
                 formElement.reset();
-                alert("Thank you for your message!");
+                alert("Thank you for your message!", response, body);
             } else {
                 throw new Error(`Something went wrong: ${
                     response
